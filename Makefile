@@ -7,7 +7,7 @@ C_FLAGS=-Wall -O2
 LD_FLAGS=-lpthread
 
 
-INC=-I./wlog -I./StdServie
+INC=-I./wlog
 
 WSRC=$(wildcard ./wlog/*.c)
 WOBJ=$(WSRC:%.c=%.o)

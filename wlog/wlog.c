@@ -13,7 +13,7 @@ author: zhanghw
 
 #include "wlog.h"
 
-#define version "wlog_v1.0.0_20210514_Beta"
+#define version "wlog_v1.0.1_20210517_Beta"
 
 #define WLOG_PATH     "/tmp/wlog/"
 #define WLOG_NOLOG    "nolog"
