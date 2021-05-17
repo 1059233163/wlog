@@ -17,6 +17,7 @@ author: zhanghw
 
 #define WLOG_PATH     "/tmp/wlog/"
 #define WLOG_NOLOG    "nolog"
+#define WLOG_EXCEPT   "except"
 #define WLOG_SHOWLOG  "showlog"
 #define WLOG_NOFILE  "nofile"
 
@@ -98,7 +99,14 @@ int WlogOut(WlogLevel level,int noprefix,const char *tag,const char *fmt, ...)
     strcat(filterName,glbWlog->filterPath);
     strcat(filterName,WLOG_NOLOG);
     if(!access(filterName,0)){
-        return 0;
+        memset(filterName,0,sizeof(filterName));
+        strcat(filterName,glbWlog->filterPath);
+        strcat(filterName,WLOG_EXCEPT);
+        strcat(filterName,"-");
+        strcat(filterName,tag);
+        if(access(filterName,0)){
+            return 0;
+        }
     }
     // /tmp/wlog/app/nolog-tag
     strcat(filterName,"-");

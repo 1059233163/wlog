@@ -22,6 +22,9 @@
   (6)禁止某一个tag的日志输出到文件，但打印到前台
     touch /tmp/wlog/testwlog/nofile-zhanghw
     touch /tmp/wlog/testwlog/showlog
+  (7)禁止除了zhanghw外的其他log产生
+    touch /tmp/wlog/testwlog/nolog
+    touch /tmp/wlog/testwlog/except-zhanghw
   
 3.隐藏性日志测试 
   建立一个~zhanghw log，然后看是否输出，再指定touch /tmp/wlog/testwlog/~zhanghw看是否输出。

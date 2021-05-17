@@ -23,7 +23,9 @@
     日志不会保存为文件
   (7)/tmp/wlog/app/nofile-tag
     带有tag的log不会保存成文件
-   注意：nolog优先，有nolog的情况下，showlog无效
+  (8)/tmp/wlog/app/except-tag
+    当有/tmp/wlog/app/nolog的时候有效，表示带有tag的log仍然产生。
+   注意：nolog优先，有nolog的情况下，showlog无效  
 6.隐藏性log
   tag以~开头的log为隐藏性log，默认不产生log，除非指定产生log，指定方式建立/tmp/wlog/app/~tag。
   其他规则跟普通log一样。
