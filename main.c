@@ -17,6 +17,9 @@ int main(int argc,char **argv)
     WLOGE("zhanghw","test wlog %d\n",100);
     WLOGF("zhanghw","test wlog %d\n",100);
 
+
+    WLOGF("~zhanghw","~test wlog %d\n",100);
+
     WLOGD("jack","test wlog %d-%d\n",100,200);
     WLOGI("jack","test wlog %d-%d\n",100,200);
     WLOGW("jack","test wlog %d-%d\n",100,200);

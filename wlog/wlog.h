@@ -9,20 +9,27 @@
 4.日期和时间戳
   缺省是不添加日期和时间戳的。需要调用WlogEnableDate和WlogEnableTimestamp来开启。
 5.log过滤
-  (1)./tmp/wlog/app
+  (1)/tmp/wlog/app
     过滤规则目录,app为程序名称
-  (2)./tmp/wlog/app/nolog
+  (2)/tmp/wlog/app/nolog
     禁止产生log
-  (3)./tmp/wlog/app/showlog
+  (3)/tmp/wlog/app/showlog
     打印log到前台
-  (4)./tmp/wlog/app/nolog-tag
+  (4)/tmp/wlog/app/nolog-tag
     禁止带有tag的log产生
-  (5)./tmp/wlog/app/showlog-tag
+  (5)/tmp/wlog/app/showlog-tag
     把带有tag的log打印到前台
+  (6)/tmp/wlog/app/nofile
+    日志不会保存为文件
+  (7)/tmp/wlog/app/nofile-tag
+    带有tag的log不会保存成文件
    注意：nolog优先，有nolog的情况下，showlog无效
-6.单条日志输出上限
+6.隐藏性log
+  tag以~开头的log为隐藏性log，默认不产生log，除非指定产生log，指定方式建立/tmp/wlog/app/~tag。
+  其他规则跟普通log一样。
+7.单条日志输出上限
   缺省为1024，超出部分丢失，可以通过WlogSetItemLength设置
-5.日志空间限制
+8.日志空间限制
   默认最大保存128KB日志，如果需要改动，可以调用WlogSetMaxSize进行测试。
 */
 #ifndef __WLOG_H
