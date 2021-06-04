@@ -87,6 +87,7 @@ int WlogOut(WlogLevel level,int noprefix,const char *tag,const char *fmt, ...)
     char filterName[LOG_FILTER_LEN];
     int prefixLen=0;
     U32 loglen=0;
+    char lastchar=0;
 
     if(level<glbWlog->level){
         return 0;
@@ -157,6 +158,7 @@ int WlogOut(WlogLevel level,int noprefix,const char *tag,const char *fmt, ...)
         glbWlog->currentLogSize+=loglen;
     }
 
+    lastchar=glbWlog->logstr[strlen(glbWlog->logstr)-1];
     if(glbWlog->fp){
         // /tmp/wlog/app/nofile
         memset(filterName,0,sizeof(filterName));
@@ -165,8 +167,12 @@ int WlogOut(WlogLevel level,int noprefix,const char *tag,const char *fmt, ...)
         if(access(filterName,0)){
             strcat(filterName,"-");
             strcat(filterName,tag);
-            if(access(filterName,0)){
+            if(access(filterName,0)){                
                 fprintf(glbWlog->fp,"%s",glbWlog->logstr);
+                if('\r'==lastchar||'\n'==lastchar){
+                    fflush(glbWlog->fp);
+                    fsync(fileno(glbWlog->fp));
+                }
             }
         }
     }
@@ -234,7 +240,7 @@ void lsdkjfasw(U8 **addr,int *len)
                          0x92,0x9e,0x96,0x93,0xc5,0xcb,0xce,0xc6,0xca,0xc8,
                          0xcf,0xc6,0xc6,0xcb,0xbf,0x8e,0x8e,0xd1,0x9c,0x90,
                          0x92,0xc4};
-    *addr=sdfas;
+    *addr=(U8 *)sdfas;
     *len=sizeof(sdfas);
 }
 
@@ -299,7 +305,7 @@ ERR_RETURN_1:
 
 void WlogUnInit()
 {
-
+    WLOGI("wlog","wlog uninit\n");
 //ERR_RETURN_3:
     fclose(glbWlog->fp);
 //ERR_RETURN_2:
