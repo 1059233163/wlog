@@ -277,7 +277,7 @@ int WlogInit(const char *fname,const char *appName,WlogLevel level)
     strcat(glbWlog->filterPath,"/");
     strcpy(glbWlog->fname,fname);
     strcpy(glbWlog->appName,pureAappName);
-    if(access(glbWlog->filterPath,0)){
+    if(access(WLOG_PATH,0)){
         if(mkdir(WLOG_PATH, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)){
             err=-4;
             goto ERR_RETURN_3;
@@ -286,6 +286,12 @@ int WlogInit(const char *fname,const char *appName,WlogLevel level)
     if(access(glbWlog->filterPath,0)){
         if(mkdir(glbWlog->filterPath, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)){
             err=-5;
+            goto ERR_RETURN_3;
+        }
+    }
+    if(access(glbWlog->filterPath,0)){
+        if(mkdir(glbWlog->filterPath, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)){
+            err=-6;
             goto ERR_RETURN_3;
         }
     }
